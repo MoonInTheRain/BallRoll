@@ -2,6 +2,11 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// UIを描画するクラス。
+/// なんでキャンバスを使わなかったのか、謎。
+/// todo: 気が向いたらキャンバスに切り替えたい。
+/// </summary>
 public class StatusAndGUI : MonoBehaviour
 {
 	public GameObject Camera;
@@ -72,6 +77,8 @@ public class StatusAndGUI : MonoBehaviour
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        // 重力の計算をさせるため、FixedUpdateで実行させる必要がある。はず。
+
 		_speed = this.GetComponent<Rigidbody>().velocity.magnitude;
 
 		Physics.gravity = GetGravityVector();
@@ -94,18 +101,30 @@ public class StatusAndGUI : MonoBehaviour
         }
 	}
 
+    /// <summary>
+    /// 加速度センサーのベクトルを取得
+    /// 取得できない場合は下向きの重力を返す
+    /// </summary>
+    /// <returns></returns>
     private Vector3 GetAcceleration()
     {
         var accVector = Input.acceleration;
 
         if (accVector == Vector3.zero)
         {
-            accVector.z = 4.9f;
+            accVector.z = Define.GravityPower;
         }
 
         return accVector;
     }
 
+    /// <summary>
+    /// 加速度センサーをUnity内の重力に変換するメソッド。
+    /// なぜこのクラスにいるのかは不明。
+    /// todo: 気が向いたら別のクラスに移したい。
+    /// todo: なんとなく、もう少し綺麗に書けそうな気がする。
+    /// </summary>
+    /// <returns></returns>
     private Vector3 GetGravityVector()
     {
         var accVector = GetAcceleration();
@@ -127,6 +146,11 @@ public class StatusAndGUI : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// 球がブロックに設置したときに、そのブロックの座標をセーブする。
+    /// todo: これも別のクラスに移したい。
+    /// </summary>
+    /// <param name="collision"></param>
     void OnCollisionEnter(Collision collision)
     {
         print(collision.gameObject.name);

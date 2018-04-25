@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// デバッグ用に矢印キーで重力をかけるクラス
+/// </summary>
 public class Force : MonoBehaviour {
 
 	// Use this for initialization

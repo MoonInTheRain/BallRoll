@@ -3,15 +3,30 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 
+/// <summary>
+/// 迷路を作るクラス
+/// </summary>
 public class MakeMaze : MonoBehaviour {
 	
 	public GameObject Cube1;
 
     private Vector3 nextCoursePos = Vector3.zero;
 
+    /// <summary>
+    /// 現在伸ばしている直線の長さ
+    /// </summary>
     private int Straight = 1;
+
+    /// <summary>
+    /// 迷路を伸ばす方向。
+    /// ０：奥、＋１：右、－1：左
+    /// </summary>
 	private int Direction = 0;
 
+    /// <summary>
+    /// 迷路のポジションを保存しているリスト。
+    /// 現状特に使用していない。
+    /// </summary>
     public List<Vector3> MazePosList;
     
 	// Use this for initialization
@@ -19,6 +34,9 @@ public class MakeMaze : MonoBehaviour {
 		MakeMazeMethod();
 	}
 	
+    /// <summary>
+    /// 迷路作成本体
+    /// </summary>
 	private void MakeMazeMethod () {
 
         MazePosList = new List<Vector3>();
@@ -32,6 +50,9 @@ public class MakeMaze : MonoBehaviour {
 		}
 	}
 
+    /// <summary>
+    /// 曲がるかどうかを決定
+    /// </summary>
     private void DecideDirection()
     {
         if (Straight <= Define.MinStraight)
@@ -48,6 +69,9 @@ public class MakeMaze : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// 次に設置するポジションを決定
+    /// </summary>
     private void SetPos()
     {
         switch (Direction)

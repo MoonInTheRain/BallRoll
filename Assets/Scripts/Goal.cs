@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// ゴール用のクラス。の予定。
+/// </summary>
 public class Goal : MonoBehaviour {
 
 	// Use this for initialization

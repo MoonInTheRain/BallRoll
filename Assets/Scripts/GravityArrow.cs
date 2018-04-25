@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// デバッグ用クラス。のはず。
+/// 今は使ってない。
+/// </summary>
 public class GravityArrow : MonoBehaviour {
 
 	Vector3 tmp;
