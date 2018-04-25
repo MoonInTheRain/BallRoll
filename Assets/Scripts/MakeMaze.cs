@@ -46,7 +46,12 @@ public class MakeMaze : MonoBehaviour {
             DecideDirection();
             SetPos();
             MazePosList.Add(nextCoursePos);
-            Instantiate(Cube1, nextCoursePos, Quaternion.identity);
+            var cube = Instantiate(Cube1, nextCoursePos, Quaternion.identity);
+
+            if(length == Define.MazeLength)
+            {
+                cube.AddComponent<Goal>();
+            }
 		}
 	}
 

@@ -19,7 +19,7 @@ public class StatusAndGUI : MonoBehaviour
 	float   _setRadY;
 	float   _setRadX;
 	
-	private bool _stopToggle = false;
+	private bool _stopToggle => (Time.timeScale == 0.0f);
 
     private Vector3 _savePos;
 
@@ -37,12 +37,23 @@ public class StatusAndGUI : MonoBehaviour
         //Stop
         var stopRect = new Rect(screenWidth * 0.05f, screenHeight * 0.9f, screenWidth * 0.3f, screenHeight * 0.1f);
         var stopLabel = _stopToggle ? "Move" : "Stop";
-        _stopToggle = GUI.Toggle(stopRect, _stopToggle, stopLabel, buttonSkin);
-		if( _stopToggle ) {
-			Time.timeScale = 0.0f;
-		}else{
-			Time.timeScale = 1.0f;
-		}
+
+        if(GUI.Toggle(stopRect, _stopToggle, stopLabel, buttonSkin))
+        {
+            if (_stopToggle == false)
+            {
+                // 切り替わった瞬間だけ時間を止める。
+                Time.timeScale = 0.0f;
+            }
+        }
+        else
+        {
+            if (_stopToggle == true)
+            {
+                // 切り替わった瞬間だけ時間を進める。
+                Time.timeScale = 1.0f;
+            }
+        }
 		
 		//ReStart
         if( GUI.Button(new Rect(screenWidth * 0.35f, screenHeight * 0.9f, screenWidth * 0.3f, screenHeight * 0.1f),"Restart", buttonSkin) ) {

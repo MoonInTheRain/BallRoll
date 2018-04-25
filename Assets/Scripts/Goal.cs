@@ -2,9 +2,11 @@
 using System.Collections;
 
 /// <summary>
-/// ゴール用のクラス。の予定。
+/// ゴール用のクラス。
 /// </summary>
 public class Goal : MonoBehaviour {
+
+    private bool _goal = false;
 
 	// Use this for initialization
 	void Start () {
@@ -15,11 +17,29 @@ public class Goal : MonoBehaviour {
 	void Update () {
 	
 	}
-	
-	void OnCollisionEnter(Collision PlayerSphere)
+
+    private void OnGUI()
+    {
+        if (_goal)
+        {
+            float screenWidth = Screen.width;
+            float screenHeight = Screen.height;
+
+            var style = new GUIStyle();
+            style.fontSize = 20;
+            style.normal.textColor = Color.cyan;
+
+            var pos = new Rect(screenWidth * 0.05f, screenHeight * 0.10f, screenWidth * 0.95f, screenHeight * 0.30f);
+            GUI.Label(pos, "Goal!!!", style);
+        }
+    }
+
+    void OnCollisionEnter(Collision PlayerSphere)
 	{
-		if(PlayerSphere.gameObject.name == ""){
-			
-		}
+		if(PlayerSphere.gameObject.tag == "Player")
+        {
+            _goal = true;
+            Time.timeScale = 0.0f;
+        }
 	}
 }
